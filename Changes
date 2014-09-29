@@ -1,3 +1,4 @@
+    - Fix for 5.18 and 5.20
     - Don't copy column data from schema that does anything other
       than define data type.  e.g. autoinc stuff
 

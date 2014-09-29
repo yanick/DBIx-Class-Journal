@@ -4,7 +4,7 @@ use base qw(DBIx::Class::Journal);
 use strict;
 use warnings;
 
-foreach my $method qw(journal_log_update journal_log_insert journal_log_delete) {
+foreach my $method (qw(journal_log_update journal_log_insert journal_log_delete)) {
     local $@;
     eval "sub $method " . ' {
     my ( $self, @args ) = @_;
