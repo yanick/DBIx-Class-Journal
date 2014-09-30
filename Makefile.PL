@@ -21,7 +21,7 @@ requires 'Class::C3::Componentised' => '1.0006';
 tests_recursive ('t');
 
 resources 'license'     => 'http://dev.perl.org/licenses/';
-resources 'repository'  => 'http://dev.catalyst.perl.org/repos/bast/DBIx-Class-Journal/';
+resources 'repository'  => 'http://github.com/dbsrgits/DBIx-Class-Journal';
 
 WriteAll();
 
