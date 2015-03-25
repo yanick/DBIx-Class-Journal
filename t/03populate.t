@@ -60,6 +60,19 @@ $count = eval { $schema->_journal_schema->resultset('ChangeLog')->count };
 is( $@, '', "no error" );
 is( $count, 2, "count is 2 (changelog)" );
 
+my $changeset = $schema->_journal_schema->resultset('ChangeSet')->single;
+
+subtest "changelogs are related to the changeset" => sub {
+    plan tests => 3;
+
+    my $changelogs = $schema->_journal_schema->resultset('ChangeLog');
+
+    is $_->changeset_id => $changeset->ID for $changelogs->all;
+
+    is $changeset->changelogs->count => 2, '->changelogs()';
+};
+
+
 # check audit log has two rows for two inserts
 $count = eval { $schema->_journal_schema->resultset('ArtistAuditLog')->count };
 

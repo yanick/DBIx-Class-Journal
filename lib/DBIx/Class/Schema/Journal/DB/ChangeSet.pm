@@ -32,6 +32,8 @@ sub journal_define_table {
     );
 
     $class->set_primary_key('ID');
+
+    $class->has_many( 'changelogs', $schema_class.'::ChangeLog', 'changeset_id' );
 }
 
 sub new {
