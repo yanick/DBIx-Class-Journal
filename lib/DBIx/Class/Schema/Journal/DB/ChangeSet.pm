@@ -5,7 +5,7 @@ use base 'DBIx::Class::Core';
 sub journal_define_table {
     my ( $class, $schema_class, $prefix ) = @_;
 
-    $class->load_components(qw/InflateColumn::DateTime/);
+    $class->load_components(qw/InflateColumn::DateTime TimeStamp/);
     $class->table($prefix . 'changeset');
 
     $class->add_columns(
@@ -23,6 +23,7 @@ sub journal_define_table {
       set_date => {
          data_type => 'timestamp',
          is_nullable => 0,
+         set_on_create => 1,
       },
       session_id => {
          data_type => 'varchar',
@@ -32,18 +33,6 @@ sub journal_define_table {
     );
 
     $class->set_primary_key('ID');
-}
-
-sub new {
-    my $self = shift->next::method(@_);
-    # I think we should not do the following and
-    # instead use DBIx::Class::TimeStamp.  If I
-    # can think of a good way (passing a version on
-    # import?) to do it and retain backcompat I will.
-    #
-    # --fREW, 01-27-2010
-    $self->set_date(scalar gmtime);
-    return $self;
 }
 
 1;
